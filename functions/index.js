@@ -9,8 +9,8 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true, // true per connessione SSL/TLS
   auth: {
-    user: "eventlinkauth@gmail.com", // Inserire qui la propria email
-        pass: "pulmbdohgumgpxwo", 
+    user: "eventlinkauth@gmail.com",
+    pass: "pulmbdohgumgpxwo", 
   }
 });
 
