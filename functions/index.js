@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
   secure: true, // true per connessione SSL/TLS
   auth: {
     user: "eventlinkauth@gmail.com", // Inserire qui la propria email
-        pass: "pulmbdohgumgpxwo", // Inserire qui la propria password
+        pass: "pulmbdohgumgpxwo", 
   }
 });
 
@@ -33,7 +33,7 @@ exports.handlePostRequest = functions.https.onRequest((request, response) => {
   const mailOptions = {
     from: 'EventLinkAuth@gmail.com',
     to: data.email, // Indirizzo email destinatario
-    subject: 'Prova',
+    subject: 'Registrazione EventLink',
     text: data.text // Testo dell'email
   };
 
