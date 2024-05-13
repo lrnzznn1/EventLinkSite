@@ -3,41 +3,41 @@ const logger = require("firebase-functions/logger");
 const functions = require('firebase-functions');
 const nodemailer = require('nodemailer');
 
-// Configura il trasportatore per l'invio delle email (puoi utilizzare qualsiasi servizio di email supportato da nodemailer)
+// Configure the transporter for sending emails (you can use any email service supported by nodemailer)
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 465,
-  secure: true, // true per connessione SSL/TLS
+  secure: true, // true for SSL/TLS connection
   auth: {
     user: "eventlinkauth@gmail.com",
     pass: "pulmbdohgumgpxwo", 
   }
 });
 
-// Funzione per gestire la richiesta POST
+// Function to handle the POST request
 exports.handlePostRequest = functions.https.onRequest((request, response) => {
-  // Verifica che la richiesta sia di tipo POST
+  // Check if the request is of type POST
   if (request.method !== 'POST') {
     return response.status(400).json({ error: 'Solo richieste POST sono supportate' });
   }
 
-  // Estrai i dati dalla richiesta POST
+  // Extract data from the POST request
   const data = request.body;
 
-  // Verifica se sono presenti i campi richiesti
+  // Check if required fields are present
   if (!data || !data.email || !data.text) {
     return response.status(400).json({ error: 'I campi email e text sono obbligatori' });
   }
 
-  // Configura l'email da inviare
+  // Configure the email to be sent
   const mailOptions = {
     from: 'EventLinkAuth@gmail.com',
-    to: data.email, // Indirizzo email destinatario
+    to: data.email, // Recipient email address
     subject: 'Registrazione EventLink',
-    text: data.text // Testo dell'email
+    text: data.text // Email body text
   };
 
-  // Invia l'email
+  // Send the email
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.error('Errore durante l\'invio dell\'email:', error);
