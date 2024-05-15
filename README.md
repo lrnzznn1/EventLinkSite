@@ -36,6 +36,3 @@ curl -X POST https://us-central1-eventlinkv2.cloudfunctions.net/handlePostReques
   "text": "Corpo dell'email"
 }'
 ```
-
-## Licenza
-Questo progetto è rilasciato sotto la [Licenza MIT](LICENSE).
