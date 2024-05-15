@@ -9,8 +9,8 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true, // true for SSL/TLS connection
   auth: {
-    user: "eventlinkauth@gmail.com",
-    pass: "pulmbdohgumgpxwo", 
+    user: process.env.EMAIL_USER, 
+    pass: process.env.EMAIL_PASS,
   }
 });
 
@@ -25,7 +25,7 @@ exports.handlePostRequest = functions.https.onRequest((request, response) => {
   const data = request.body;
 
   // Check if required fields are present
-  if (!data || !data.email || !data.text) {
+  if (!data || !data.email || !data.text || !data.subject) {
     return response.status(400).json({ error: 'I campi email e text sono obbligatori' });
   }
 
@@ -33,7 +33,7 @@ exports.handlePostRequest = functions.https.onRequest((request, response) => {
   const mailOptions = {
     from: 'EventLinkAuth@gmail.com',
     to: data.email, // Recipient email address
-    subject: 'Registrazione EventLink',
+    subject: data.subject,//'Registrazione EventLink',
     text: data.text // Email body text
   };
 
