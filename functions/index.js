@@ -3,7 +3,7 @@ const logger = require("firebase-functions/logger");
 const functions = require('firebase-functions');
 const nodemailer = require('nodemailer');
 
-// Configure the transporter for sending emails (you can use any email service supported by nodemailer)
+// Configure the transporter for sending emails
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 465,
@@ -33,7 +33,7 @@ exports.handlePostRequest = functions.https.onRequest((request, response) => {
   const mailOptions = {
     from: 'EventLinkAuth@gmail.com',
     to: data.email, // Recipient email address
-    subject: data.subject,//'Registrazione EventLink',
+    subject: data.subject, // Email subject
     text: data.text // Email body text
   };
 
